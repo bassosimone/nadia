@@ -26,9 +26,7 @@ except ImportError:
     where = os.path.dirname(sys.argv[0])
     if not where:
         where = "."
-    sys.path.insert(0, where + "/errorhandler-1.1.1")
     sys.path.insert(0, where + "/xlrd-0.7.1")
-    sys.path.insert(0, where + "/xlutils-1.4.1")
     sys.path.insert(0, where + "/xlwt-0.7.2")
     import xlrd, xlwt.Utils
 
