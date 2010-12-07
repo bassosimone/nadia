@@ -79,6 +79,7 @@ def _edit_inplace(cells):
         while j < len(cells[i]):
             if cells[i][j]:
                 prev = cells[i][j]
+            #XXX
             if i == 0 or j == 0 or cells[i-1][j-1] == cells[i-1][j]:
                 cells[i][j] = prev
             j = j + 1
