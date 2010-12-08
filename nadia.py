@@ -83,14 +83,12 @@ def _edit_inplace(cells):
                 cells[i][j] = cells[i][j-1]
 
 def _compress(cells, separator):
-    j = 0
-    while j < len(cells[0]):
-        i = 1
-        while i < len(cells):
+    nrows = len(cells)
+    ncols = len(cells[0])
+    for i in range(1, nrows):
+        for j in range(0, ncols):
             if cells[i][j]:
                 cells[0][j] += separator + cells[i][j]
-            i = i + 1
-        j = j + 1
 
 def data_headers(sheet, range, separator="/"):
     cells = row_values(sheet, range)
