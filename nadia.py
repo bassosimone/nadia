@@ -72,14 +72,15 @@ def cell_value(sheet, cell):
 # data section
 
 def _edit_inplace(cells):
-    for i in range(0, len(cells)):
-        prev = ""
-        for j in range(0, len(cells[i])):
-            if cells[i][j]:
-                prev = cells[i][j]
-            #XXX
-            if i == 0 or j == 0 or cells[i-1][j-1] == cells[i-1][j]:
-                cells[i][j] = prev
+    nrows = len(cells)
+    ncols = len(cells[0])
+    for j in range(1, ncols):
+        if not cells[0][j]:
+            cells[0][j] = cells[0][j-1]
+    for i in range(1, nrows):
+        for j in range(1, ncols):
+            if not cells[i][j] and cells[i-1][j-1] == cells[i-1][j]:
+                cells[i][j] = cells[i][j-1]
 
 def _compress(cells, separator):
     j = 0
