@@ -1,0 +1,22 @@
+Nadia, helper script for it.ckan.net
+````````````````````````````````````
+
+Nadia is an helper script to populate it.ckan.net.  We have a large
+data set regarding public section information in Piedmont and in
+Italy.  And this data set is composed of a collection of XLS files.
+Each file is organized in a tabular way, but the script we use to
+upload to CKAN expects a linearized data set.  This is the task of
+nadia.
+
+To linearize an XLS file you need to prepare a configuration file
+that describes the structure of the XLS file.  Then, assuming the
+configuration file is named FOO, you can invoke `./nadia.py FOO'
+to linearize the XLS file.  Assuming the original file was named
+BAR.xls, nadia will create a linearized CSV output file, which will
+be named BAR.xls.nadia.csv.
+
+Nadia depends on Python >= 2.5 only.  There are other dependencies,
+but they are shipped together with the nadia distribution and so you
+don't need to install any additional package.
+
+Please read HOWTO to learn how to prepare a configuration file.
