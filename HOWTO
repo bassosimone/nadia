@@ -1,0 +1,66 @@
+How-To use nadia
+````````````````
+
+This tutorial references the file sections.png.
+
+.. image:: sections.png
+
+The content of the XLS file in sections.png is divided into the following
+sections:
+
+1. *data_headers*: this is the red section in sections.png;
+
+2. *data_values*: this is the blue section in sections.png;
+
+3. *y_axis*: this is the green section in sections.png;
+
+4. *global_data*: these are the violet, orange, and yellow sections of
+   sections.png;
+
+5. *global_const*: these are not shown in sections.png.
+
+For Nadia to linearize an XLS file you need to manually inspect this file
+and identify the above sections.  Each section is identifier by the upper left
+cell and by the bottom right cell.  So, for example:
+
+* data_headers section is *E3:J5*;
+
+* data_values section is *E7:J12*;
+
+* y_axis is *D3:D12*;
+
+* there are three global_data sections:
+
+  - *Organization* which is *A3*;
+
+  - *WebSite* which is *A4*;
+
+  - *OrganizationMission* which is *A5*.
+
+Assuming that the original file is named `foo.xls`, this leads to the
+following configuration file::
+
+  [nadia]
+  filename= foo.xls
+  data_headers_location= E3:J5
+  data_values_location= E7:J12
+  y_axis_location= D7:D12
+
+  [global_data]
+  Organization= A3
+  Website= A4
+  OrganizationMission= A5
+
+  [global_const]
+  Category= Economic and Business Information
+
+Note that you can add arbitrary constant data, in the *global_const*
+section.  For example, in this case, we have added an additional column
+named `Category`, whose value is `Economic and Business Information`.
+
+Once you have written the configuration file, you need to invoke nadia.py
+as follows in order to linearize the `foo.xls`::
+
+  nadia.py foo.conf
+
+(Here we have assumed that the configuration file name is `foo.conf`).
