@@ -19,4 +19,5 @@ Nadia depends on Python >= 2.5 only.  There are other dependencies,
 but they are shipped together with the nadia distribution and so you
 don't need to install any additional package.
 
-Please read HOWTO to learn how to prepare a configuration file.
+Please read HOWTO (or HOWTO.html) to learn how to prepare a
+configuration file.
