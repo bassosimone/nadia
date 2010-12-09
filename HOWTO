@@ -61,6 +61,6 @@ named `Category`, whose value is `Economic and Business Information`.
 Once you have written the configuration file, you need to invoke nadia.py
 as follows in order to linearize the `foo.xls`::
 
-  nadia.py foo.conf
+  ./nadia.py foo.conf
 
 (Here we have assumed that the configuration file name is `foo.conf`).
