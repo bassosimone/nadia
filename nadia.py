@@ -131,7 +131,12 @@ def _y_axis_crap_before_type(M, data):
         if _is_crap(data[i]):
             crap = y_row
             continue
-        data[i].append(crap + "/" + y_row)
+        # do not add "/" if crap is ""
+        value = crap
+        if value:
+            value += "/"
+        value += y_row
+        data[i].append(value)
 
 # type-before-crap = the crap is the description of the data
 def _y_axis_type_before_crap(M, data):
