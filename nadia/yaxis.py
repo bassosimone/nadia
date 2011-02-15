@@ -32,6 +32,7 @@ if __name__ == "__main__":
 from nadia.excel import open_sheet
 from nadia.excel import row_values
 from nadia.data import data_section
+from nadia.django import slugify
 
 def _is_garbage(x):
     for k in x:
@@ -43,30 +44,32 @@ def _is_garbage(x):
 def _y_axis_garbage_before_type(M, data):
     i = 0
     garbage = ""
-    data[0].append("Type")
+    data[0].append("name")
     while i < len(M):
         y_row = M[i][0]
         i = i + 1                               # XXX
         if _is_garbage(data[i]):
             garbage = y_row
             continue
-        # do not add "/" if garbage is ""
+        # do not add " " if crap is empty
         value = garbage
         if value:
-            value += "/"
+            value += " "
         value += y_row
+        value = slugify(value)
         data[i].append(value)
 
 # type-before-garbage = the garbage is the description of the data
 def _y_axis_type_before_garbage(M, data):
     i = 0
     last = -1
-    data[0].append("Type")
-    data[0].append("Description")
+    data[0].append("name")
+    data[0].append("description")
     while i < len(M):
         y_row = M[i][0]
         i = i + 1                               # XXX
         if not _is_garbage(data[i]):
+            y_row = slugify(y_row)
             data[i].append(y_row)
             data[i].append("")
             last = i
