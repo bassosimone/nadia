@@ -15,9 +15,11 @@ to linearize the XLS file.  Assuming the original file was named
 BAR.xls, nadia will create a linearized CSV output file, which will
 be named BAR.xls.nadia.csv.
 
-Nadia depends on Python >= 2.5 only.  There are other dependencies,
-but they are shipped together with the nadia distribution and so you
-don't need to install any additional package.
+Nadia depends on Python >= 2.5 and on json.  If Python >= 2.6 json
+is already part of the standard library, otherwise you need to install
+simplejson.  There are other dependencies, but they are shipped together
+with the nadia distribution and so you don't need to install any
+additional package.
 
 Please read doc/HOWTO (or doc/HOWTO.html) to learn how to prepare a
 configuration file.
