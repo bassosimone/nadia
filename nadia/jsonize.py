@@ -89,7 +89,7 @@ def jsonize(data, fp, indent=None):
             if header == "title":
                 package.title = cell
                 continue
-            if header == "category":
+            if header == "tag":
                 package.tags.append(cell.lower().replace(" ", "-"))
                 continue
 
