@@ -104,11 +104,14 @@ def jsonize(data, fp, indent=None):
         # dataset author.
         # While on that, make sure the author name is not all-
         # uppercase because that looks ugly.
+        # Ensure that the package name is not too long or the server
+        # will have a boo.
         #
 
         name = slugify(package.author.lower())
         if not package.name.startswith(name):
             package.name = name + "_" + package.name
+        package.name = package.name[:100]
 
         #
         # AFAIK vars() here will work as long as all the variables of
