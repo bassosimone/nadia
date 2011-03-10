@@ -106,8 +106,7 @@ def jsonize(data, fp, indent=None):
         # uppercase because that looks ugly.
         #
 
-        package.author = package.author.lower()
-        name = slugify(package.author)
+        name = slugify(package.author.lower())
         if not package.name.startswith(name):
             package.name = name + "_" + package.name
 
