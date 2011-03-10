@@ -93,7 +93,8 @@ def jsonize(data, fp, indent=None):
                 package.tags.append(cell.lower().replace(" ", "-"))
                 continue
 
-            package.extras[header] = cell
+            if cell:
+                package.extras[header] = cell
 
         # XXX
         package.notes = "\n\n".join(package.notes)
