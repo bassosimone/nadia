@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+
+#
+# Copyright (c) 2010-2011 Simone Basso <bassosimone@gmail.com>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#
+
+import json
+import os
+import pprint
+import sys
+
+PREFIX = "@DATADIR@/nadia"
+if PREFIX.startswith("@"):
+    PREFIX = "."
+
+sys.path.insert(0, PREFIX)
+
+import ckanclient
+
+if __name__ == "__main__":
+    upload = False
+
+    fp = open(os.environ["HOME"] + os.sep + "/.ckan")
+    apikey = fp.read().strip()
+    fp.close()
+
+    arguments = sys.argv[1:]
+    if len(arguments) == 0:
+        sys.stderr.write("usage: uploader [-upload] file ...\n")
+        sys.exit(1)
+
+    if arguments[0] == "-upload":
+        upload = True
+        arguments = arguments[1:]
+
+    for argument in arguments:
+        if argument == "-":
+            fp = sys.stdin
+        else:
+            fp = open(arguments, "rb")
+
+        while True:
+            line = fp.readline()
+            line = line.strip()
+
+            if not line:
+                break
+
+            dictionary = json.loads(line)
+
+            if not upload:
+                octets = pprint.pformat(dictionary)
+                sys.stdout.write(octets)
+                sys.stdout.write("\n")
+                continue
+
+            client = ckanclient.CkanClient(api_key=apikey,
+              base_location="http://it.ckan.net/api")
+            #client.package_entity_put(dictionary)              # to upload
+            client.package_register_post(dictionary)
