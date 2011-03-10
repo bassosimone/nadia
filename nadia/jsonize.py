@@ -59,9 +59,8 @@ class CKANPackage(object):
 def jsonize(data, fp, indent=None):
     headers = data[0]
     body = data[1:]
-    for i in range(1, len(body)):
+    for row in row:
         package = CKANPackage()
-        row = body[i]
 
         #
         # The algorithm here matches loosely the one that has been
