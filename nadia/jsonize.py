@@ -59,7 +59,7 @@ class CKANPackage(object):
 def jsonize(data, fp, indent=None):
     headers = data[0]
     body = data[1:]
-    for row in row:
+    for row in body:
         package = CKANPackage()
 
         #
