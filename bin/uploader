@@ -68,4 +68,5 @@ if __name__ == "__main__":
 
             client = ckanclient.CkanClient(api_key=apikey,
               base_location="http://it.ckan.net/api")
+            #client.package_entity_put(dictionary)              # to upload
             client.package_register_post(dictionary)
